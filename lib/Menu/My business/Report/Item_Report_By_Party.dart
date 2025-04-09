@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
 
 class Item_Report_By_Party extends StatefulWidget {
@@ -13,31 +14,54 @@ class _Item_Report_By_Party extends State<Item_Report_By_Party> {
   var firstDate = DateTime.now();
   var lastDate = DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
 
-  void _select_firstDate(BuildContext context) {
-    showDatePicker(
+
+  void _select_firstDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: DateTime(DateTime.monthsPerYear),
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          firstDate = picked;
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        firstDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
-  void _select_lastDate(BuildContext context) {
-    showDatePicker(
+  void _select_lastDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          lastDate = picked;
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        lastDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
 
   String? selected_timeDuration = "This week";
@@ -134,21 +158,21 @@ class _Item_Report_By_Party extends State<Item_Report_By_Party> {
         ),
         surfaceTintColor: Color(0xFF0078AA),
         backgroundColor: Color(0xFF0078AA),
-        title: Text("Item Report By Party",style: TextStyle(color: Colors.white),),
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
+        title: Text("Item Report By Party",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500,fontSize: 20),),
+        iconTheme: IconThemeData(color: Colors.white,),
         actions: [
           Container(
             height: 25,
             width: 25,
             child: Image.asset("Assets/Images/pdf.png"),
           ),
+          SizedBox(width: 10,),
           Container(
-            height: 30,
-            width: 50,
+            height: 25,
+            width: 25,
             child: Image.asset("Assets/Images/xls.png"),
           ),
+          SizedBox(width: 10,),
         ],
       ),
       backgroundColor: Colors.white,

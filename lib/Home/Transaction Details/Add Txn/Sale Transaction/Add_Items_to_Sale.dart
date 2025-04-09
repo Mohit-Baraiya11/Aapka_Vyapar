@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
+import 'package:remixicon/remixicon.dart';
 
 class Add_Items_to_Sale extends StatefulWidget {
   String title;
@@ -100,7 +100,7 @@ class _AddItemsToSaleState extends State<Add_Items_to_Sale> {
         title: Text(title!,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         actions: [
           IconButton(
-            icon: Icon(FlutterRemix.settings_2_line),
+            icon: Icon(Remix.settings_2_line),
             onPressed: () {
               // Add settings functionality here
             },

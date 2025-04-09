@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
 
 class Expense_Category_Report extends StatefulWidget {
@@ -13,34 +14,53 @@ class _Expense_Category_Report extends State<Expense_Category_Report> {
   var firstDate = DateTime.now();
   var lastDate = DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
 
-  void _select_firstDate(BuildContext context) {
-    showDatePicker(
+  void _select_firstDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: DateTime(2000, 1, 1), // Fixed incorrect firstDate
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          firstDate = picked;
-          if (lastDate.isBefore(firstDate)) {
-            lastDate = firstDate; // Ensure lastDate is always after firstDate
-          }
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        firstDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
-  void _select_lastDate(BuildContext context) {
-    showDatePicker(
+  void _select_lastDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: firstDate, // Ensure lastDate is picked after firstDate
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          lastDate = picked;
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        lastDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
 
   String? selected_timeDuration = "This week";
@@ -130,10 +150,7 @@ class _Expense_Category_Report extends State<Expense_Category_Report> {
         ),
         surfaceTintColor: Color(0xFF0078AA),
         backgroundColor: Color(0xFF0078AA),
-        title: Text(
-          "Expense Category Report",
-          style: TextStyle(color: Colors.white),
-        ),
+        title: Text("Expense Category Report", style: TextStyle(color: Colors.white),),
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
@@ -143,11 +160,13 @@ class _Expense_Category_Report extends State<Expense_Category_Report> {
             width: 25,
             child: Image.asset("Assets/Images/pdf.png"),
           ),
+          SizedBox(width: 10,),
           Container(
-            height: 30,
-            width: 50,
+            height: 25,
+            width: 25,
             child: Image.asset("Assets/Images/xls.png"),
           ),
+          SizedBox(width: 10,),
         ],
       ),
       backgroundColor: Colors.white,

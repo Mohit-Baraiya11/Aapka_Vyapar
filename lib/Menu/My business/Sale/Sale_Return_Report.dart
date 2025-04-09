@@ -3,7 +3,6 @@ import 'package:demo/Home/Transaction%20Details/Add%20Txn/Sale%20Transaction/Sal
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
 
 
@@ -186,7 +185,7 @@ class _Sale_Return_Report extends State<Sale_Return_Report> {
                         ),
                       ),
                       SizedBox(width: 10,),
-                      Icon(FlutterRemix.calendar_2_line,color: Colors.blueAccent,size: 15,),
+                      Icon(Remix.calendar_2_line,color: Colors.blueAccent,size: 15,),
                     ],
                   ),
                 ),

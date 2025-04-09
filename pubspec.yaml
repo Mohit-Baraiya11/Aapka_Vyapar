@@ -30,7 +30,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_remix: ^0.0.3
   remixicon: ^1.1.0
   image_picker: ^0.8.7+4
   flutter_launcher_icons: ^0.13.1
@@ -46,12 +45,13 @@ dependencies:
   another_carousel_pro: ^1.0.2
   file_picker: ^5.2.10 # For selecting Excel files
   excel: ^2.1.0
+  flutter_native_splash: ^2.4.4
 
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/Images/Vyapar_logo.png"
-  background_color: "#FF0000" # Red background color
+  image_path: "Assets/Images/app_icon.png"
+  background_color: "#FF0000"
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -2,7 +2,6 @@ import 'package:demo/Home/Prefered_underline_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
 
 
@@ -184,7 +183,7 @@ class AddnewParty extends State<Add_new_Party>{
         title: Text('Party To Party Transfer',style: TextStyle(fontSize: 20),),
         actions: [
           IconButton(
-            icon: Icon(FlutterRemix.settings_2_line),
+            icon: Icon(Remix.settings_2_line),
             onPressed: () {
 
             },

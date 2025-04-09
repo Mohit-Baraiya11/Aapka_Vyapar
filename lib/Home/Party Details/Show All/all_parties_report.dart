@@ -8,6 +8,7 @@ class All_Parties_Report extends StatefulWidget {
 }
 
 class _AllPartiesReportState extends State<All_Parties_Report> {
+  bool date_filter = false;
   bool showZeroBalance = true;
   String selectedSortBy = "Name";
   String selectedShowOption = "All parties";
@@ -21,14 +22,11 @@ class _AllPartiesReportState extends State<All_Parties_Report> {
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.grey.shade300,
+          statusBarColor: Color(0xFF00557D),
           statusBarIconBrightness: Brightness.light,
         ),
         backgroundColor: Color(0xFF0078AA),
-        title: Text(
-          "Party Report",
-          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-        ),
+        title: Text("Party Report", style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
         iconTheme: IconThemeData(color: Colors.white),
         actions: [
           Container(
@@ -36,11 +34,13 @@ class _AllPartiesReportState extends State<All_Parties_Report> {
             width: 25,
             child: Image.asset("Assets/Images/pdf.png"),
           ),
+          SizedBox(width: 10,),
           Container(
-            height: 30,
-            width: 50,
+            height: 25,
+            width: 25,
             child: Image.asset("Assets/Images/xls.png"),
           ),
+          SizedBox(width: 10,),
         ],
       ),
       body: Container(
@@ -53,16 +53,17 @@ class _AllPartiesReportState extends State<All_Parties_Report> {
               Row(
                 children: [
                   Checkbox(
-                    value: showZeroBalance,
+                    activeColor: Colors.blueAccent,
+                    value: date_filter,
                     onChanged: (value) {
                       setState(() {
-                        showZeroBalance = value!;
+                        date_filter = value!;
                       });
                     },
                   ),
-                  const Text("Date Filter"),
+                   Text("Date Filter"),
                   SizedBox(width: 50,),
-                  const Text("Date "),
+                  Text("Date "),
                   GestureDetector(
                     onTap: () async {
                       DateTime? selectedDate = await showDatePicker(
@@ -93,7 +94,7 @@ class _AllPartiesReportState extends State<All_Parties_Report> {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
 
               // Sorting and Showing Filters
               Row(
@@ -154,6 +155,7 @@ class _AllPartiesReportState extends State<All_Parties_Report> {
                 children: [
                   // Date Filter Checkbox
                   Checkbox(
+                    activeColor: Colors.blueAccent,
                     value: showZeroBalance,
                     onChanged: (value) {
                       setState(() {
@@ -161,7 +163,7 @@ class _AllPartiesReportState extends State<All_Parties_Report> {
                       });
                     },
                   ),
-                  const Text("Show O balance party"),
+                   Text("Show O balance party"),
                   ],
               ),
               const SizedBox(height: 16),
@@ -265,7 +267,7 @@ class _AllPartiesReportState extends State<All_Parties_Report> {
                                   color: balance[index] > 0
                                       ? Colors.green
                                       : Colors.red,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),

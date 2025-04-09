@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
 
 class Item_Wise_Discount extends StatefulWidget {
@@ -13,31 +14,53 @@ class _Item_Wise_Discount extends State<Item_Wise_Discount> {
   var firstDate = DateTime.now();
   var lastDate = DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
 
-  void _select_firstDate(BuildContext context) {
-    showDatePicker(
+  void _select_firstDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: DateTime(DateTime.monthsPerYear),
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          firstDate = picked;
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        firstDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
-  void _select_lastDate(BuildContext context) {
-    showDatePicker(
+  void _select_lastDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          lastDate = picked;
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        lastDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
 
   String? selected_timeDuration = "This week";
@@ -147,11 +170,13 @@ class _Item_Wise_Discount extends State<Item_Wise_Discount> {
             width: 25,
             child: Image.asset("Assets/Images/pdf.png"),
           ),
+          SizedBox(width: 10,),
           Container(
-            height: 30,
-            width: 50,
+            height: 25,
+            width: 25,
             child: Image.asset("Assets/Images/xls.png"),
           ),
+          SizedBox(width: 10,),
         ],
       ),
       backgroundColor: Colors.grey.shade100,

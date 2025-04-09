@@ -4,11 +4,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
-
-import '../../../BottomNavbar_save_buttons.dart';
 import 'Add_Items_to_Sale.dart';
 
 class Sale_Return extends StatefulWidget {
@@ -936,7 +933,7 @@ class SaleReturn extends State<Sale_Return> {
                                         borderRadius: BorderRadius.circular(8.0),
                                         color: Colors.grey[100],
                                       ),
-                                      child: Icon(FlutterRemix.camera_line),
+                                      child: Icon(Remix.camera_line),
                                     ),
                                   ),
                                 ],

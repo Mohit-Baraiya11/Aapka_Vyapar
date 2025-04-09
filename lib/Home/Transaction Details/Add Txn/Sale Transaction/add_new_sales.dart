@@ -4,7 +4,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
 import '../../../Prefered_underline_appbar.dart';
 import '../../Show All/add_bank_account.dart';
@@ -156,7 +155,7 @@ class AddNewSales extends State<Add_new_Sales> {
             ),
           ),
           IconButton(
-            icon: Icon(FlutterRemix.settings_2_line),
+            icon: Icon(Remix.settings_2_line),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Transaction_Settings()));
             },
@@ -862,7 +861,7 @@ class AddNewSales extends State<Add_new_Sales> {
                                       borderRadius: BorderRadius.circular(8.0),
                                       color: Colors.grey[100],
                                     ),
-                                    child: Icon(FlutterRemix.camera_line),
+                                    child: Icon(Remix.camera_line),
                                   ),
                                 ),
                               ],

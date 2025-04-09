@@ -1,14 +1,9 @@
-import 'package:demo/Dashboard/Item/Add_Items_to_Unit.dart';
 import 'package:demo/Dashboard/Item/Set_Conversion.dart';
-import 'package:demo/Items/More%20Option/Units.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
-
-import '../Home/BottomNavbar_save_buttons.dart';
 import '../Home/Prefered_underline_appbar.dart';
 
 class Add_new_item extends StatefulWidget {
@@ -840,7 +835,7 @@ class Addnewitem extends State<Add_new_item> with SingleTickerProviderStateMixin
                                           keyboardType: TextInputType.datetime,
                                           decoration: InputDecoration(
                                             labelText: "As of Date",
-                                            suffixIcon: Icon(FlutterRemix.calendar_2_line),
+                                            suffixIcon: Icon(Remix.calendar_2_line),
                                             floatingLabelStyle: TextStyle(color: Colors.blue),
                                             border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(4.0),

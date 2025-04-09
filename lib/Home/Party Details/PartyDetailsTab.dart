@@ -1,7 +1,6 @@
 import 'package:demo/Home/Party%20Details/Show%20All/Party_Details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -39,190 +38,176 @@ class _PartyDetailsTab extends State<PartyDetailsTab> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.blue.shade50,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.0)
-              ),
-              padding:EdgeInsets.only(top: 4.0,bottom: 4.0),
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 35,bottom: 7),
-                      child: Text(
-                        "Quick Links",
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Stack(
+        children:[
+          Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8.0)),
+                  padding: EdgeInsets.only(top: 4.0, bottom: 4.0),
+                  child: Column(
                     children: [
-                      QuickLink(
-                        icon: FlutterRemix.account_box_line,
-                        label: "Import Party",
-                        backgroundColor: Colors.lightBlue,
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Import_Party()));
-                        },
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 35, bottom: 7),
+                          child: Text(
+                            "Quick Links",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
                       ),
-                      QuickLink(
-                        backgroundColor: Colors.lightBlue,
-                        icon: FlutterRemix.contacts_line,
-                        label: "Party Statement",
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Party_Statement()));
-                        },
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          QuickLink(
+                            icon: Remix.account_box_line,
+                            label: "Import Party",
+                            backgroundColor: Colors.lightBlue,
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Import_Party()));
+                            },
+                          ),
+                          QuickLink(
+                            backgroundColor: Colors.lightBlue,
+                            icon: Remix.contacts_line,
+                            label: "Party Statement",
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Party_Statement()));
+                            },
+                          ),
+                          QuickLink(
+                            backgroundColor: Colors.lightBlue,
+                            icon: Remix.settings_2_line,
+                            label: "Party settings",
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Party_Settings()));
+                            },
+                          ),
+                          QuickLink(
+                            backgroundColor: Colors.lightBlue,
+                            icon: Remix.arrow_right_circle_line,
+                            label: "Show All",
+                            onTap: () {
+                              double screenWidth = MediaQuery.of(context).size.width;
+                              double screenHeight = MediaQuery.of(context).size.height;
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height: screenHeight * 0.3,
+                                    color: Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(bottom: 18.0, top: 8.0),
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    "More Options",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Icon(Icons.close),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          GridView.builder(
+                                            shrinkWrap: true,
+                                            physics: NeverScrollableScrollPhysics(),
+                                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 3,
+                                              childAspectRatio: 1.5,
+                                            ),
+                                            itemBuilder: (context, index) {
+                                              return InkWell(
+                                                onTap: () {
+                                                  if (index == 1) {
+                                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => All_Parties_Report()));
+                                                  }
+                                                },
+                                                child: QuickLink(
+                                                  icon: iconOf_party_detail_show_all[index],
+                                                  label: labelOf_iconOf_party_detail_show_all[index],
+                                                  backgroundColor: default_color,
+                                                ),
+                                              );
+                                            },
+                                            itemCount: labelOf_iconOf_party_detail_show_all.length,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                      QuickLink(
-                        backgroundColor: Colors.lightBlue,
-                        icon: FlutterRemix.settings_2_line,
-                        label: "Party settings",
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Party_Settings()));
-                        },
+                    ],
+                  ),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: "Search for transaction",
+                            hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+                            prefixIcon: Icon(
+                              Remix.search_line,
+                              color: Colors.blue,
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
                       ),
-                      QuickLink(
-                          backgroundColor: Colors.lightBlue,
-                          icon: FlutterRemix.arrow_right_circle_line,
-                          label: "Show All",
-                          onTap: (){
-
+                      SizedBox(width: 5),
+                      Container(
+                        color: Colors.white,
+                        child: IconButton(
+                          onPressed: () {
                             double screenWidth = MediaQuery.of(context).size.width;
                             double screenHeight = MediaQuery.of(context).size.height;
-
                             showModalBottomSheet(
+                              backgroundColor: Colors.white,
                               context: context,
                               isScrollControlled: true,
                               builder: (BuildContext context) {
                                 return Container(
-                                  height: screenHeight * 0.3,
-                                  color: Colors.white,
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            // Sale Transactions Header
-                                            Padding(
-                                              padding: const EdgeInsets.only(bottom: 18.0,top: 8.0),
-                                              child: Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      "More Options",
-                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: Icon(Icons.close),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            GridView.builder(
-                                              shrinkWrap: true,
-                                              physics: NeverScrollableScrollPhysics(),
-                                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 3,
-                                                childAspectRatio: 1.5,
-                                              ),
-                                              itemBuilder: (context, index) {
-                                                return InkWell(
-                                                  onTap: (){
-                                                    if(index==1){
-                                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>All_Parties_Report()));
-                                                    }
-                                                    //   if(index==1){
-                                                    //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Day_Book()));
-                                                    //   }
-                                                    //   if(index==2){
-                                                    //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>All_Transaction()));
-                                                    //   }
-                                                    //   if(index==3){
-                                                    //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Profit_and_loss()));
-                                                    //   }
-                                                  },
-                                                  child: QuickLink(
-                                                    icon: iconOf_party_detail_show_all[index],
-                                                    label: labelOf_iconOf_party_detail_show_all[index],
-                                                    backgroundColor: default_color,
-                                                  ),
-                                                );
-                                              },
-                                              itemCount: labelOf_iconOf_party_detail_show_all.length,
-                                            ),
-
-                                          ],
-                                        ),
-                                      ),
-                                );
-                              },
-                            );
-                          }
-
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              height: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: "Search for transaction",
-                        hintStyle:
-                        TextStyle(fontSize: 13, color: Colors.grey),
-                        prefixIcon: Icon(
-                          FlutterRemix.search_line,
-                          color: Colors.blue,
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 5,),
-                  Container(
-                    color: Colors.white,
-                    child: IconButton(
-                        onPressed: (){
-                          double screenWidth = MediaQuery.of(context).size.width;
-                          double screenHeight = MediaQuery.of(context).size.height;
-
-                          showModalBottomSheet(
-                            backgroundColor: Colors.white,
-                            context: context,
-                            isScrollControlled: true,
-                            builder: (BuildContext context) {
-                              return Container(
-                                height: screenHeight * 0.40,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                                ),
-                                child:  Column(
-                                    mainAxisSize: MainAxisSize.min, // Prevent extra space
+                                  height: screenHeight * 0.40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(12.0),
@@ -235,10 +220,10 @@ class _PartyDetailsTab extends State<PartyDetailsTab> {
                                           ],
                                         ),
                                       ),
-                                      Divider(thickness: 0.5, height: 1), // Reduce Divider height
+                                      Divider(thickness: 0.5, height: 1),
                                       ListTile(
-                                        dense: true, // Reduce default spacing
-                                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4), // Adjust padding
+                                        dense: true,
+                                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                                         title: Text("Sort by Name [A-Z]", style: TextStyle(fontSize: 15)),
                                         trailing: Checkbox(value: false, onChanged: (bool? value) {}),
                                       ),
@@ -253,7 +238,7 @@ class _PartyDetailsTab extends State<PartyDetailsTab> {
                                               return Container(
                                                 color: Colors.white,
                                                 child: FractionallySizedBox(
-                                                  heightFactor: 0.5, // Adjusted height for a simpler UI
+                                                  heightFactor: 0.5,
                                                   child: Column(
                                                     mainAxisSize: MainAxisSize.min,
                                                     children: [
@@ -265,7 +250,7 @@ class _PartyDetailsTab extends State<PartyDetailsTab> {
                                                             Text("Send Reminder", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                                                             IconButton(
                                                               icon: Icon(Icons.close),
-                                                              onPressed: () => Navigator.pop(context), // Close modal
+                                                              onPressed: () => Navigator.pop(context),
                                                             ),
                                                           ],
                                                         ),
@@ -273,11 +258,11 @@ class _PartyDetailsTab extends State<PartyDetailsTab> {
                                                       Divider(),
                                                       ListTile(
                                                         title: Text("Mohit"),
-                                                        subtitle: Text("Balance: ₹500"), // Example balance
+                                                        subtitle: Text("Balance: ₹500"),
                                                         trailing: ElevatedButton(
                                                           onPressed: () {
                                                             sendWhatsAppMessage("+919904598373", "Hi Mohit, please pay your pending balance.");
-                                                            Navigator.pop(context); // Close modal after sending
+                                                            Navigator.pop(context);
                                                           },
                                                           child: Text("Send"),
                                                         ),
@@ -312,84 +297,81 @@ class _PartyDetailsTab extends State<PartyDetailsTab> {
                                       ),
                                     ],
                                   ),
-                              );
-                            },
-                          );
-                        },
-                        icon: Icon(Icons.more_vert),
-                    ),
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.more_vert),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-
-
-            SizedBox(height: 10,),
-            Expanded(
-              child:  Stack(
-                children:[
-                  ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(bottom: 8),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8)
-                        ),
-                        child: ListTile(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Party_Details()));
-                            },
-                          title: Text("Mohit",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w400,color: Colors.black),),
-                          subtitle: Text("22 jan 25",style: TextStyle(fontSize: 12,color: Colors.grey),),
-                          trailing: Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text("₹ 200",style: TextStyle(fontSize: 13,color: Color(0xFF38C782)),),
-                                Text("you'll get",style: TextStyle(fontSize: 13,color: Color(0xFF38C782)),),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  Positioned(
-                    bottom: 20,
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(14),
-                          backgroundColor: Color(0xFFE03537),
-                        ),
-                        onPressed: () {
-                          Navigator.push(context,MaterialPageRoute(builder: (context)=>Add_new_Party()));
+                ),
+                SizedBox(height: 10),
+                ListView.builder(
+                  itemCount: 1,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(bottom: 8),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Party_Details()));
                         },
-                        child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        title: Text("Mohit", style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black)),
+                        subtitle: Text("22 jan 25", style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        trailing: Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Icon(FlutterRemix.user_3_line,color: Colors.white,size: 20,),
-                              SizedBox(width: 8),
-                              Text(
-                                "Add New Party",
-                                style: TextStyle(color: Colors.white),
-                              ),
+                              Text("₹ 200", style: TextStyle(fontSize: 13, color: Color(0xFF38C782))),
+                              Text("you'll get", style: TextStyle(fontSize: 13, color: Color(0xFF38C782))),
                             ],
                           ),
                         ),
                       ),
+                    );
+                  },
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ),
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 14,vertical: 12),
+                  backgroundColor: Color(0xFFE03537),
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Add_new_Party()));
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Remix.user_3_line, color: Colors.white, size: 20),
+                    const SizedBox(width: 8),
+                    Text(
+                      "Add New Parties",
+                      style: TextStyle(color: Colors.white),
                     ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -398,10 +380,10 @@ class _PartyDetailsTab extends State<PartyDetailsTab> {
 
 
 var iconOf_party_detail_show_all = [
-  FlutterRemix.share_line,
-  FlutterRemix.building_4_line,
-  FlutterRemix.notification_3_line,
-  FlutterRemix.whatsapp_line
+  Remix.share_line,
+  Remix.building_4_line,
+  Remix.notification_3_line,
+  Remix.whatsapp_line
 ];
 var labelOf_iconOf_party_detail_show_all = [
   "Invite Party",

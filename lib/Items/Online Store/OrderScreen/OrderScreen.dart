@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -193,7 +192,7 @@ class _OrdersScreenState extends State<OrdersScreen>
                                     hintStyle:
                                     TextStyle(fontSize: 13, color: Colors.grey),
                                     prefixIcon: Icon(
-                                      FlutterRemix.search_line,
+                                      Remix.search_line,
                                       color: Colors.blue,
                                     ),
                                     border: OutlineInputBorder(

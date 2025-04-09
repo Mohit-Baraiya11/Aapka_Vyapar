@@ -4,11 +4,9 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
 
-import '../../../BottomNavbar_save_buttons.dart';
 import 'Add_Items_to_Sale.dart';
 
 
@@ -109,7 +107,7 @@ class DeliveryChallan extends State<Delivery_Challan> {
         bottom: Prefered_underline_appbar(),
         actions: [
           IconButton(
-            icon: Icon(FlutterRemix.settings_2_line),
+            icon: Icon(Remix.settings_2_line),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Transaction_Settings()));
             },
@@ -815,7 +813,7 @@ class DeliveryChallan extends State<Delivery_Challan> {
                                         borderRadius: BorderRadius.circular(8.0),
                                         color: Colors.grey[100],
                                       ),
-                                      child: Icon(FlutterRemix.camera_line),
+                                      child: Icon(Remix.camera_line),
                                     ),
                                   ),
                                 ],

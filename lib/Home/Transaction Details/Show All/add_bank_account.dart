@@ -1,10 +1,8 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:intl/intl.dart';
+import 'package:remixicon/remixicon.dart';
 
 class Add_Bank_Account extends StatefulWidget
 {
@@ -232,7 +230,7 @@ class AddBankAccount extends State<Add_Bank_Account>
                                 decoration: InputDecoration(
                                   labelText: "IFSC Code",
                                   hintText: "IFSC Code",
-                                  suffix: Icon(FlutterRemix.search_2_line,color: Colors.blueAccent,),
+                                  suffix: Icon(Remix.search_2_line,color: Colors.blueAccent,),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
@@ -304,7 +302,7 @@ class AddBankAccount extends State<Add_Bank_Account>
                                 decoration: InputDecoration(
                                   labelText: "IFSC Code",
                                   hintText: "IFSC Code",
-                                  suffix: Icon(FlutterRemix.search_2_line,color: Colors.blueAccent,),
+                                  suffix: Icon(Remix.search_2_line,color: Colors.blueAccent,),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
@@ -449,7 +447,7 @@ class AddBankAccount extends State<Add_Bank_Account>
                                 decoration: InputDecoration(
                                   labelText: "IFSC Code",
                                   hintText: "IFSC Code",
-                                  suffix: Icon(FlutterRemix.search_2_line,color: Colors.blueAccent,),
+                                  suffix: Icon(Remix.search_2_line,color: Colors.blueAccent,),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),

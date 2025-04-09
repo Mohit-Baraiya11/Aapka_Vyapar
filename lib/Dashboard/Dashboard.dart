@@ -13,7 +13,6 @@ import 'package:demo/Home/Transaction%20Details/Show%20All/profit&loss.dart';
 import 'package:demo/Items/ItemDetails/itemDetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
 
 class Dashboard extends StatefulWidget {
@@ -257,7 +256,7 @@ class _DashboardState extends State<Dashboard> {
                           ),
                           // Show All
                           QuickLink(
-                            icon: FlutterRemix.hand_coin_line,
+                            icon: Remix.hand_coin_line,
                             label: "Profit & Loss",
                             backgroundColor: Colors.pink.shade50,
                             onTap: () {

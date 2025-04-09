@@ -4,12 +4,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
-
-import '../../../BottomNavbar_save_buttons.dart';
-import '../../../Prefered_underline_appbar.dart';
 import '../Sale Transaction/Add_Items_to_Sale.dart';
 
 class Purchase_Order extends StatefulWidget {
@@ -135,7 +131,7 @@ class PurchaseOrder extends State<Purchase_Order> {
             )),
         actions: [
           IconButton(
-            icon: Icon(FlutterRemix.settings_2_line),
+            icon: Icon(Remix.settings_2_line),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Transaction_Settings()));
             },
@@ -1004,7 +1000,7 @@ class PurchaseOrder extends State<Purchase_Order> {
                                         borderRadius: BorderRadius.circular(8.0),
                                         color: Colors.grey[100],
                                       ),
-                                      child: Icon(FlutterRemix.camera_line),
+                                      child: Icon(Remix.camera_line),
                                     ),
                                   ),
                                 ],

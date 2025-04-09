@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
-
+import 'package:remixicon/remixicon.dart';
 import 'Party_Additional_Fields.dart';
 
 class Party_Settings extends StatefulWidget {
@@ -60,7 +59,7 @@ class PartySettings extends State<Party_Settings> {
                     Expanded(child: Text("Invite parties to add themselves")),
                     IconButton(
                         onPressed: (){},
-                        icon: Icon(FlutterRemix.arrow_right_line)
+                        icon: Icon(Remix.arrow_right_line)
                     ),
                   ],
                 ),

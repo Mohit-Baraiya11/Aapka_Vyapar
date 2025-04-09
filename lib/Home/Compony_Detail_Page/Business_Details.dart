@@ -3,7 +3,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
+import 'package:remixicon/remixicon.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 import '../BottomNavbar_save_buttons.dart';
@@ -281,6 +281,11 @@ class BusinessDetails extends State<Business_Details>
   bool _showSignaturePad = false; // Flag to show/hide signature pad
   final GlobalKey<SfSignaturePadState> _signatureKey = GlobalKey();
 
+
+  bool show_gstn = false;
+  bool business_type = false;
+  bool business_category = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -334,7 +339,7 @@ class BusinessDetails extends State<Business_Details>
                 onPressed: (){
 
                 },
-                icon:Icon(FlutterRemix.image_add_line)
+                icon:Icon(Remix.image_add_line)
             ),
           ),
         ],
@@ -386,7 +391,7 @@ class BusinessDetails extends State<Business_Details>
                               onPressed: (){},
                               child: Row(
                                 children: [
-                                  Icon(FlutterRemix.share_forward_line,color: Colors.white,),
+                                  Icon(Remix.share_forward_line,color: Colors.white,),
                                   SizedBox(width: 8,),
                                   Text("Share Card",style: TextStyle(color: Colors.white),),
                                 ],
@@ -467,20 +472,23 @@ class BusinessDetails extends State<Business_Details>
 
                                     Row(
                                       children: [
-                                        SizedBox(width: 205,),
+                                        SizedBox(width: MediaQuery.of(context).size.width*0.53,),
                                         Text("Show on card",style: TextStyle(fontSize: 12),),
                                         Transform.scale(
                                           scale: 0.7, // Adjust size
                                           child: Theme(
                                             data: ThemeData(
                                               switchTheme: SwitchThemeData(
-                                                trackOutlineColor: MaterialStateProperty.all(Colors.transparent), // Remove border
+                                                trackOutlineColor: MaterialStateProperty.all(Colors.transparent),
                                               ),
                                             ),
                                             child: Switch(
-                                              value: false,
+                                              activeColor: Colors.blueAccent,
+                                              value: show_gstn,
                                               onChanged: (value) {
-
+                                                setState(() {
+                                                  show_gstn = value;
+                                                });
                                               },
                                             ),
                                           ),
@@ -620,7 +628,7 @@ class BusinessDetails extends State<Business_Details>
                                       readOnly: true, // Prevent keyboard from opening
                                       controller: TextEditingController(text: selectedState),
                                       decoration: InputDecoration(
-                                        suffixIcon: Icon(FlutterRemix.arrow_down_s_line,color: Colors.blueAccent,),
+                                        suffixIcon: Icon(Remix.arrow_down_s_line,color: Colors.blueAccent,),
                                         border: OutlineInputBorder(),
                                       ),
                                       onTap: () {
@@ -633,7 +641,7 @@ class BusinessDetails extends State<Business_Details>
                                       readOnly: true, // Prevent keyboard from opening
                                       controller: TextEditingController(text: selectBusiness_type),
                                       decoration: InputDecoration(
-                                        suffixIcon: Icon(FlutterRemix.arrow_down_s_line,color: Colors.blueAccent,),
+                                        suffixIcon: Icon(Remix.arrow_down_s_line,color: Colors.blueAccent,),
                                         border: OutlineInputBorder(),
                                       ),
                                       onTap: () {
@@ -642,7 +650,7 @@ class BusinessDetails extends State<Business_Details>
                                     ),
                                     Row(
                                       children: [
-                                        SizedBox(width: 205,),
+                                        SizedBox(width: MediaQuery.of(context).size.width*0.53,),
                                         Text("Show on card",style: TextStyle(fontSize: 12),),
                                         Transform.scale(
                                           scale: 0.7, // Adjust size
@@ -653,9 +661,12 @@ class BusinessDetails extends State<Business_Details>
                                               ),
                                             ),
                                             child: Switch(
-                                              value: false,
+                                              activeColor: Colors.blueAccent,
+                                              value: business_type,
                                               onChanged: (value) {
-
+                                                setState(() {
+                                                  business_type = value;
+                                                });
                                               },
                                             ),
                                           ),
@@ -668,7 +679,7 @@ class BusinessDetails extends State<Business_Details>
                                       readOnly: true, // Prevent keyboard from opening
                                       controller: TextEditingController(text: selectBusiness_category),
                                       decoration: InputDecoration(
-                                        suffixIcon: Icon(FlutterRemix.arrow_down_s_line,color: Colors.blueAccent,),
+                                        suffixIcon: Icon(Remix.arrow_down_s_line,color: Colors.blueAccent,),
                                         border: OutlineInputBorder(),
                                       ),
                                       onTap: () {
@@ -677,7 +688,7 @@ class BusinessDetails extends State<Business_Details>
                                     ),
                                     Row(
                                       children: [
-                                        SizedBox(width: 205,),
+                                        SizedBox(width: MediaQuery.of(context).size.width*0.53,),
                                         Text("Show on card",style: TextStyle(fontSize: 12),),
                                         Transform.scale(
                                           scale: 0.7, // Adjust size
@@ -688,9 +699,12 @@ class BusinessDetails extends State<Business_Details>
                                               ),
                                             ),
                                             child: Switch(
-                                              value: false,
+                                              activeColor: Colors.blueAccent,
+                                              value: business_category,
                                               onChanged: (value) {
-
+                                                setState(() {
+                                                  business_category = value;
+                                                });
                                               },
                                             ),
                                           ),
@@ -761,7 +775,7 @@ class BusinessDetails extends State<Business_Details>
                                 borderRadius: BorderRadius.circular(90),
                                 color: Colors.white,
                               ),
-                              child: Icon(FlutterRemix.pencil_line, color: Colors.blueAccent),
+                              child: Icon(Remix.pencil_line, color: Colors.blueAccent),
                             ),
                             Text("Create your signature here", style: TextStyle(fontSize: 14)),
                           ],

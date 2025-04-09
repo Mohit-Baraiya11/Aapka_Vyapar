@@ -2,11 +2,8 @@ import 'package:demo/Home/Prefered_underline_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
-
-import 'BottomNavbar_save_buttons.dart';
 
 class Sale_Report extends StatefulWidget {
   @override
@@ -201,7 +198,7 @@ class SaleReport extends State<Sale_Report> {
                       color: Colors.grey,
                     ),
                   ),
-                  Icon(FlutterRemix.calendar_2_line,color: Colors.blueAccent,size: 15,),
+                  Icon(Remix.calendar_2_line,color: Colors.blueAccent,size: 15,),
                   SizedBox(width: 8),
                   GestureDetector(
                     onTap: () => _select_firstDate(context),

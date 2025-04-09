@@ -2,7 +2,7 @@ import 'package:demo/Home/Prefered_underline_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
+import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
 
 
@@ -15,31 +15,53 @@ class _Sale_Purchase_By_Party extends State<Sale_Purchase_By_Party> {
   var firstDate = DateTime.now();
   var lastDate = DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
 
-  void _select_firstDate(BuildContext context) {
-    showDatePicker(
+  void _select_firstDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: DateTime(DateTime.monthsPerYear),
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          firstDate = picked;
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        firstDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
-  void _select_lastDate(BuildContext context) {
-    showDatePicker(
+  void _select_lastDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          lastDate = picked;
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        lastDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
 
   String? selected_timeDuration = "This week";
@@ -127,18 +149,20 @@ class _Sale_Purchase_By_Party extends State<Sale_Purchase_By_Party> {
         elevation: 0,
         bottom: Prefered_underline_appbar(),
         foregroundColor: Colors.black,
-        title: Text('Sale/Purchase by Party', style: TextStyle(color: Colors.black)),
+        title: Text('Sale/Purchase by party',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         actions: [
           Container(
             height: 25,
             width: 25,
             child: Image.asset("Assets/Images/pdf.png"),
           ),
+          SizedBox(width: 10,),
           Container(
-            height: 30,
-            width: 50,
+            height: 25,
+            width: 25,
             child: Image.asset("Assets/Images/xls.png"),
           ),
+          SizedBox(width: 10,),
         ],
       ),
       body: Container(
@@ -173,7 +197,7 @@ class _Sale_Purchase_By_Party extends State<Sale_Purchase_By_Party> {
                       color: Colors.grey,
                     ),
                   ),
-
+                  Icon(Remix.calendar_2_line,color: Colors.blueAccent,size: 15,),
                   SizedBox(width: 8),
                   GestureDetector(
                     onTap: () => _select_firstDate(context),
@@ -195,12 +219,9 @@ class _Sale_Purchase_By_Party extends State<Sale_Purchase_By_Party> {
                       style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                   ),
-                  SizedBox(width: 20,),
-                  Icon(Remix.calendar_2_line,color: Colors.blueAccent,size: 15,),
                 ],
               ),
             ),
-
             Expanded(
               child: Container(
                 height: double.infinity,

@@ -2,7 +2,8 @@ import 'package:demo/Home/Prefered_underline_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
+import 'package:intl/intl.dart';
+import 'package:remixicon/remixicon.dart';
 
 class Purchase_Report extends StatefulWidget {
   @override
@@ -23,32 +24,56 @@ class _PurchaseReportState extends State<Purchase_Report> {
     'Custom'
   ];
 
-  void _selectFirstDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+  void _select_firstDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: firstDate,
+      initialDate: DateTime.now(),
       firstDate: DateTime(2000),
-      lastDate: DateTime(2030),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
     );
-    if (picked != null && picked != firstDate)
+    if (pickedDate != null) {
       setState(() {
-        firstDate = picked;
+        firstDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
       });
+    }
+  }
+  void _select_lastDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        lastDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
 
-  void _selectLastDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: lastDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2030),
-    );
-    if (picked != null && picked != lastDate)
-      setState(() {
-        lastDate = picked;
-      });
-  }
-
+  String? selected_timeDuration = "This week";
   void _showTimeSelectionModal(BuildContext context) {
     showModalBottomSheet(
       backgroundColor: Colors.white,
@@ -121,25 +146,21 @@ class _PurchaseReportState extends State<Purchase_Report> {
         ),
         surfaceTintColor: Colors.white,
         backgroundColor: Colors.white,
-        title: Text('Purchase Report', style: TextStyle(color: Colors.black)),
+        title: Text('Purchase Report',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         bottom: Prefered_underline_appbar(),
         actions: [
-          IconButton(
-            icon: Container(
-                height: 25,
-                width: 25,
-                child: Image.asset("Assets/Images/pdf.png")
-            ),
-            onPressed: () {},
+          Container(
+            height: 25,
+            width: 25,
+            child: Image.asset("Assets/Images/pdf.png"),
           ),
-          IconButton(
-            icon: Container(
-                height: 25,
-                width: 25,
-                child: Image.asset("Assets/Images/xls.png")
-            ),
-            onPressed: () {},
+          SizedBox(width: 10,),
+          Container(
+            height: 25,
+            width: 25,
+            child: Image.asset("Assets/Images/xls.png"),
           ),
+          SizedBox(width: 10,),
         ],
       ),
       body: Container(
@@ -152,16 +173,17 @@ class _PurchaseReportState extends State<Purchase_Report> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+
                   GestureDetector(
-                    onTap: () {
+                    onTap: (){
                       _showTimeSelectionModal(context);
                     },
                     child: Container(
                       child: Row(
                         children: [
-                          Text("$selectedTimeDuration"),
-                          SizedBox(width: 10),
-                          Icon(Icons.arrow_drop_down, color: Colors.blueAccent),
+                          Text("${selected_timeDuration}"),
+                          SizedBox(width: 5,),
+                          Icon(Remix.arrow_down_s_line,color: Colors.blueAccent,),
                         ],
                       ),
                     ),
@@ -173,9 +195,10 @@ class _PurchaseReportState extends State<Purchase_Report> {
                       color: Colors.grey,
                     ),
                   ),
+                  Icon(Remix.calendar_2_line,color: Colors.blueAccent,size: 15,),
                   SizedBox(width: 8),
                   GestureDetector(
-                    onTap: () => _selectFirstDate(context),
+                    onTap: () => _select_firstDate(context),
                     child: Text(
                       '${firstDate.day}/${firstDate.month}/${firstDate.year}',
                       style: TextStyle(fontSize: 12, color: Colors.black),
@@ -188,14 +211,12 @@ class _PurchaseReportState extends State<Purchase_Report> {
                   ),
                   SizedBox(width: 4),
                   GestureDetector(
-                    onTap: () => _selectLastDate(context),
+                    onTap: () => _select_lastDate(context),
                     child: Text(
                       '${lastDate.day}/${lastDate.month}/${lastDate.year}',
                       style: TextStyle(fontSize: 12, color: Colors.black),
                     ),
                   ),
-                  SizedBox(width: 20),
-                  Icon(FlutterRemix.calendar_2_line, color: Colors.blueAccent, size: 15),
                 ],
               ),
             ),

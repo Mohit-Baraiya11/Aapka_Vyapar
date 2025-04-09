@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -136,7 +135,6 @@ class PartyStatement extends State<Party_Statement> {
     );
   }
 
-
   TextEditingController search_controller = TextEditingController();
   FocusNode search_focusnode = FocusNode();
   bool is_search_focused =  false;
@@ -213,7 +211,7 @@ class PartyStatement extends State<Party_Statement> {
                       color: Colors.grey,
                     ),
                   ),
-                  Icon(FlutterRemix.calendar_2_line,color: Colors.blueAccent,size: 15,),
+                  Icon(Remix.calendar_2_line,color: Colors.blueAccent,size: 15,),
                   SizedBox(width: 8),
                   GestureDetector(
                     onTap: () => _select_firstDate(context),
@@ -240,7 +238,7 @@ class PartyStatement extends State<Party_Statement> {
             ),
             Divider(color: Colors.grey,thickness: 0.8,),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
               child: Column(
                 children: [
                   Row(
@@ -272,21 +270,22 @@ class PartyStatement extends State<Party_Statement> {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
                       children: [
                         SizedBox(
                           height: 30,
                           child: TextButton(
                               style: TextButton.styleFrom(
-                                backgroundColor: Colors.grey.shade200,
+                                backgroundColor: Colors.grey.shade100,
                               ),
                               onPressed: (){
                                 ThemeChanged(context);
                               },
-                              child: Center(child: Text("Theme - Acounting View",style: TextStyle(fontSize: 11,color: Colors.black),))
+                              child: Center(child: Text("Theme - Accounting View",style: TextStyle(fontSize: 11,color: Colors.black),))
                           ),
                         ),
+                        SizedBox(width: 10,),
                       ],
                     ),
                   ),
@@ -294,6 +293,7 @@ class PartyStatement extends State<Party_Statement> {
                 ],
               ),
             ),
+            SizedBox(height: 10,),
 
             Expanded(
               child: Container(
@@ -707,4 +707,3 @@ class PartyStatement extends State<Party_Statement> {
     );
   }
 }
-

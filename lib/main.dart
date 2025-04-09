@@ -4,7 +4,6 @@ import 'package:demo/Menu/Menu.dart';
 import 'package:demo/Settings/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
 
 import 'Home/Compony_Detail_Page/Business_Details.dart';
@@ -13,7 +12,13 @@ import 'Items/items.dart';
 import 'Splash-Screen/Splash_Screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -69,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
             unselectedItemColor: Colors.black54,
             items: const [
               BottomNavigationBarItem(icon: Icon(Remix.home_8_line), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Remix.dashboard_line), label: 'Dashboard'),
+              BottomNavigationBarItem(icon: Icon(Remix.bar_chart_2_line), label: 'Dashboard'),
               BottomNavigationBarItem(icon: Icon(Remix.box_3_line), label: 'Items'),
               BottomNavigationBarItem(icon: Icon(Remix.menu_2_fill), label: 'Menu'),
             ],
@@ -125,7 +130,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 border:Border.all(width: 1,color: Colors.blue),
                 borderRadius: BorderRadius.circular(90),
               ),
-              child: Icon(FlutterRemix.store_2_line, color: Colors.blue,size: 18,)
+              child: Icon(Remix.store_2_line, color: Colors.blue,size: 18,)
           ),
         ), // Replace with your store icon
       ),
@@ -135,13 +140,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          icon: const Icon(FlutterRemix.notification_3_line),
+          icon: const Icon(Remix.notification_3_line),
           onPressed: () {
            Navigator.push(context,MaterialPageRoute(builder: (context)=>Notification_page()));
           },
         ),
         Container(
-          child: IconButton(icon: Icon(FlutterRemix.settings_2_line),
+          child: IconButton(icon: Icon(Remix.settings_2_line),
             onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
             }

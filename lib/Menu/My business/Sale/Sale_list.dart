@@ -2,9 +2,7 @@ import 'package:demo/Home/Prefered_underline_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
-
 import '../../../Home/Transaction Details/Add Txn/Sale Transaction/add_new_sales.dart';
 
 class Sale_List extends StatefulWidget {
@@ -230,7 +228,7 @@ class _Sale_ListState extends State<Sale_List> {
                                               child: GestureDetector(
                                                 onTap: (){},
                                                 child: Icon(
-                                                    FlutterRemix.printer_line,
+                                                  Remix.printer_line,
                                                     color: Colors.grey,
                                                 ),
                                               ),
@@ -297,7 +295,7 @@ class _Sale_ListState extends State<Sale_List> {
                                                                               borderRadius: BorderRadius.circular(90),
                                                                             ),
                                                                             child: Icon(
-                                                                              FlutterRemix.image_line,
+                                                                              Remix.image_line,
                                                                               color: Colors.red,
                                                                               size: screenWidth * 0.06, // Responsive icon size
                                                                             ),
@@ -401,7 +399,7 @@ class _Sale_ListState extends State<Sale_List> {
                                                   );
                                                 },
                                                   child: Icon(
-                                                  FlutterRemix.share_forward_line,
+                                                    Remix.share_forward_line,
                                                   color: Colors.grey,
                                                   size: MediaQuery.of(context).size.width * 0.06, // Responsive icon size
                                                 ),
@@ -460,7 +458,7 @@ class _Sale_ListState extends State<Sale_List> {
                                                     },
                                                   );
                                                 },
-                                                child:Icon(FlutterRemix.more_2_line)
+                                                child:Icon(Remix.more_2_line)
                                             ),
                                           ],
                                         ),

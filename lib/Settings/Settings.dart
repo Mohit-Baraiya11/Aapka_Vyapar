@@ -21,7 +21,7 @@ class _SettingsState extends State<Settings> {
             statusBarColor: Color(0xFF00557D),
             statusBarIconBrightness: Brightness.light,
           ),
-        surfaceTintColor: Color(0xFF0078AA),
+        surfaceTintColor:Colors.blue.shade50,
         backgroundColor: Colors.blue.shade50,
         title: Text("Settings",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         actions: [
@@ -47,98 +47,100 @@ class _SettingsState extends State<Settings> {
         ]
       ),
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          SizedBox(height: 10,),
-          ListTile(
-            onTap: (){},
-            dense: true,
-            contentPadding: EdgeInsets.only(left: 20),
-            leading: Icon(Remix.settings_line),
-            title: Text("Geberal",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
-            trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
-          ),
-          Divider(color: Colors.grey.shade500,),
-
-          ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.only(left: 20),
-            leading: Icon(Remix.money_rupee_circle_line),
-            title: Text("Transaction",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
-            trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
-          ),
-          Divider(color: Colors.grey.shade500,),
-
-
-          ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.only(left: 20),
-            leading: Icon(Remix.printer_line),
-            title: Text("Invoice Print",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
-            trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
-          ),
-          Divider(color: Colors.grey.shade500,),
-
-
-          ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.only(left: 20),
-            leading: Icon(Remix.discount_percent_line),
-            title: Text("Taxes & GST",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
-            trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
-          ),
-          Divider(color: Colors.grey.shade500,),
-
-
-          ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.only(left: 20),
-            leading: Icon(Remix.group_3_line),
-            title: Text("User management",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
-            trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
-          ),
-          Divider(color: Colors.grey.shade500,),
-
-
-          ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.only(left: 20),
-            leading: Icon(Remix.message_2_fill),
-            title: Text("Transaction SMS",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
-            trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
-          ),
-          Divider(color: Colors.grey.shade500,),
-
-
-          ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.only(left: 20),
-            leading: Icon(Remix.notification_3_line),
-            title: Text("Reminder",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
-            trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
-          ),
-          Divider(color: Colors.grey.shade500,),
-
-
-          ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.only(left: 20),
-            leading: Icon(Remix.map_pin_user_fill),
-            title: Text("Party",style:TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
-            trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
-          ),
-          Divider(color: Colors.grey.shade500,),
-
-          ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.only(left: 20),
-            leading: Icon(Remix.slideshow_line),
-            title: Text("Item",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
-            trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
-          ),
-          Divider(color: Colors.grey.shade500,),
-
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 10,),
+            ListTile(
+              onTap: (){},
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 20),
+              leading: Icon(Remix.settings_line),
+              title: Text("Geberal",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
+              trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
+            ),
+            Divider(color: Colors.grey.shade500,),
+        
+            ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 20),
+              leading: Icon(Remix.money_rupee_circle_line),
+              title: Text("Transaction",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
+              trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
+            ),
+            Divider(color: Colors.grey.shade500,),
+        
+        
+            ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 20),
+              leading: Icon(Remix.printer_line),
+              title: Text("Invoice Print",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
+              trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
+            ),
+            Divider(color: Colors.grey.shade500,),
+        
+        
+            ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 20),
+              leading: Icon(Remix.discount_percent_line),
+              title: Text("Taxes & GST",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
+              trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
+            ),
+            Divider(color: Colors.grey.shade500,),
+        
+        
+            ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 20),
+              leading: Icon(Remix.group_3_line),
+              title: Text("User management",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
+              trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
+            ),
+            Divider(color: Colors.grey.shade500,),
+        
+        
+            ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 20),
+              leading: Icon(Remix.message_2_fill),
+              title: Text("Transaction SMS",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
+              trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
+            ),
+            Divider(color: Colors.grey.shade500,),
+        
+        
+            ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 20),
+              leading: Icon(Remix.notification_3_line),
+              title: Text("Reminder",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
+              trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
+            ),
+            Divider(color: Colors.grey.shade500,),
+        
+        
+            ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 20),
+              leading: Icon(Remix.map_pin_user_fill),
+              title: Text("Party",style:TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
+              trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
+            ),
+            Divider(color: Colors.grey.shade500,),
+        
+            ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.only(left: 20),
+              leading: Icon(Remix.slideshow_line),
+              title: Text("Item",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
+              trailing: IconButton(onPressed:(){}, icon: Icon(Remix.arrow_right_s_line)),
+            ),
+            Divider(color: Colors.grey.shade500,),
+        
+          ],
+        ),
       ),
     );
   }

@@ -11,7 +11,6 @@ import 'package:demo/Menu/My%20business/Report/Item_Detail_Report.dart';
 import 'package:demo/Menu/My%20business/Report/Item_Wise_Profit_And_Loss.dart';
 import 'package:demo/Menu/My%20business/Report/Low_Stock_Summary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
 
 import 'ItemDetails/itemDetails.dart';
@@ -33,6 +32,7 @@ class _ItemsPageContentState extends State<ItemsPageContent> {
     return Scaffold(
       backgroundColor: Colors.blue.shade50,
       body: Container(
+        height: MediaQuery.of(context).size.height,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Stack(
@@ -75,7 +75,7 @@ class _ItemsPageContentState extends State<ItemsPageContent> {
                               ),
                               //Sale Report
                               QuickLink(
-                                icon: FlutterRemix.funds_line,
+                                icon: Remix.funds_line,
                                 label: "Stock Summary",
                                 onTap: () {
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Stock_Summary_Report()));
@@ -92,7 +92,7 @@ class _ItemsPageContentState extends State<ItemsPageContent> {
                               ),
                               //Show all
                               QuickLink(
-                                icon: FlutterRemix.arrow_right_circle_line,
+                                icon: Remix.arrow_right_circle_line,
                                 label: "Show All",
                                 onTap: () {
                                   More_Option(context);
@@ -126,10 +126,10 @@ class _ItemsPageContentState extends State<ItemsPageContent> {
                                   hintStyle:
                                   TextStyle(fontSize: 13, color: Colors.grey),
                                   prefixIcon: Icon(
-                                    FlutterRemix.search_line,
+                                    Remix.search_line,
                                     color: Colors.blue,
                                   ),
-                                  suffixIcon:Icon(FlutterRemix.filter_2_line, color: Colors.blue,),
+                                  suffixIcon:Icon(Remix.filter_2_line, color: Colors.blue,),
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius: BorderRadius.circular(8),
@@ -333,7 +333,7 @@ class _ItemsPageContentState extends State<ItemsPageContent> {
                   ],
                 ),
              Positioned(
-                bottom: 20,
+                bottom: 10,
                 left: 0,
                 right: 0,
                 child: Center(

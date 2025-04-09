@@ -2,11 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:remixicon/remixicon.dart';
-
 import '../Home.dart';
-import '../Party Details/PartyDetailsTab.dart';
 import '../Sale_Report.dart';
 import 'Add Txn/Other Transaction/Expenses.dart';
 import 'Add Txn/Other Transaction/p2p_transfer.dart';
@@ -59,242 +56,235 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Container(
+      backgroundColor: Colors.blue.shade50,
+      body:Container(
         color: Colors.blue.shade50,
         child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  // Quick Links Section
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 35, bottom: 7),
-                            child: Text(
-                              "Quick Links",
-                              style: TextStyle(fontSize: 15),
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            //Add Txn
-                            QuickLink(
-                              icon: FlutterRemix.file_add_line,
-                              backgroundColor: Colors.redAccent,
-                              label: "Add Txn",
-                              onTap: () {
-                                pop_up_modal(context);
-                              },
-                            ),
-                            //Sale Report
-                            QuickLink(
-                              icon: FlutterRemix.file_chart_line,
-                              label: "Sale Report",
-                              backgroundColor: Colors.lightBlue,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Sale_Report()),
-                                );
-                              },
-                            ),
-                            //Txn settings
-                            QuickLink(
-                              icon: FlutterRemix.settings_2_line,
-                              label: "Txn Settings",
-                              backgroundColor: Colors.lightBlue,
-                              iconColor: Colors.red,
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Transaction_Settings()),
-                                );
-                              },
-                            ),
-                            //Show all
-                            QuickLink(
-                              icon: FlutterRemix.arrow_right_circle_line,
-                              label: "Show All",
-                              backgroundColor: Colors.lightBlue,
-                              onTap: () {
-                                ShowAll(context);
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10),
-
-                  // Search Bar
-                  if (value != 1)
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    // Quick Links Section
                     Container(
-                      height: 40,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
                         color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Row(
+                      padding: EdgeInsets.only(top: 8.0),
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Search for transaction",
-                                hintStyle:
-                                TextStyle(fontSize: 13, color: Colors.grey),
-                                prefixIcon: Icon(
-                                  FlutterRemix.search_line,
-                                  color: Colors.blue,
-                                ),
-                                suffixIcon:IconButton(
-                                  onPressed: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      backgroundColor: Colors.white,
-                                      isScrollControlled: true,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                                      ),
-                                      builder: (context) {
-                                        return Container(
-                                          child: FractionallySizedBox(
-                                            heightFactor: 0.85,
-                                            child: StatefulBuilder(
-                                              builder: (context, setModalState) {
-                                                return Stack(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets.all(8.0),
-                                                      child: Column(
-                                                        children: [
-                                                          Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            children: [
-                                                              Text(
-                                                                "Filter By",
-                                                                style: TextStyle(
-                                                                  fontWeight: FontWeight.w600,
-                                                                  fontSize: 22,
-                                                                ),
-                                                              ),
-                                                              IconButton(
-                                                                onPressed: () {
-                                                                  Navigator.pop(context);
-                                                                },
-                                                                icon: Icon(Icons.close),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Divider(),
-                                                          Expanded(
-                                                            child: ListView(
-                                                              children: filterOptions.keys.map((filter) {
-                                                                return CheckboxListTile(
-                                                                  title: Text(filter),
-                                                                  value: filterOptions[filter],
-                                                                  onChanged: (bool? value) {
-                                                                    setModalState(() {
-                                                                      filterOptions[filter] = value!;
-                                                                    });
-                                                                  },
-                                                                );
-                                                              }).toList(),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Positioned(
-                                                      bottom: 16,
-                                                      left: 16,
-                                                      right: 16,
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                        children: [
-                                                          Expanded(
-                                                            child: ElevatedButton(
-                                                              style: ElevatedButton.styleFrom(
-                                                                backgroundColor: Colors.grey.shade200,
-                                                                minimumSize: Size(120, 48),
-                                                                shape: RoundedRectangleBorder(
-                                                                  borderRadius: BorderRadius.circular(90),
-                                                                ),
-                                                              ),
-                                                              onPressed: () {
-                                                                setModalState(() {
-                                                                  filterOptions.updateAll((key, value) => false);
-                                                                });
-                                                              },
-                                                              child: Text(
-                                                                "Clear",
-                                                                style: TextStyle(color: Colors.black),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(width: 10),
-                                                          Expanded(
-                                                            child: ElevatedButton(
-                                                              style: ElevatedButton.styleFrom(
-                                                                backgroundColor: Colors.red,
-                                                                minimumSize: Size(120, 48),
-                                                                shape: RoundedRectangleBorder(
-                                                                  borderRadius: BorderRadius.circular(90),
-                                                                ),
-                                                              ),
-                                                              onPressed: () {
-                                                                Navigator.pop(context);
-                                                              },
-                                                              child: Text(
-                                                                "Apply",
-                                                                style: TextStyle(color: Colors.white),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-
-                                  icon: Icon(FlutterRemix.filter_2_line, color: Colors.blue,),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 35, bottom: 7),
+                              child: Text(
+                                "Quick Links",
+                                style: TextStyle(fontSize: 15),
                               ),
                             ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              QuickLink(
+                                icon: Remix.file_add_line,
+                                backgroundColor: Colors.redAccent,
+                                label: "Add Txn",
+                                onTap: () {
+                                  pop_up_modal(context);
+                                },
+                              ),
+                              QuickLink(
+                                icon: Remix.file_chart_line,
+                                label: "Sale Report",
+                                backgroundColor: Colors.lightBlue,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Sale_Report()),
+                                  );
+                                },
+                              ),
+                              QuickLink(
+                                icon: Remix.settings_2_line,
+                                label: "Txn Settings",
+                                backgroundColor: Colors.lightBlue,
+                                iconColor: Colors.red,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Transaction_Settings()),
+                                  );
+                                },
+                              ),
+                              QuickLink(
+                                icon: Remix.arrow_right_circle_line,
+                                label: "Show All",
+                                backgroundColor: Colors.lightBlue,
+                                onTap: () {
+                                  ShowAll(context);
+                                },
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                  SizedBox(height: 10),
+                    SizedBox(height: 10),
 
-                  // Transactions List Section
-                  Expanded(
-                    child: value == 1
+                    // Search Bar
+                    if (value != 1)
+                      Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: "Search for transaction",
+                                  hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+                                  prefixIcon: Icon(
+                                    Remix.search_line,
+                                    color: Colors.blue,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        backgroundColor: Colors.white,
+                                        isScrollControlled: true,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                        ),
+                                        builder: (context) {
+                                          return Container(
+                                            child: FractionallySizedBox(
+                                              heightFactor: 0.85,
+                                              child: StatefulBuilder(
+                                                builder: (context, setModalState) {
+                                                  return Stack(
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                        child: Column(
+                                                          children: [
+                                                            Row(
+                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                              children: [
+                                                                Text(
+                                                                  "Filter By",
+                                                                  style: TextStyle(
+                                                                    fontWeight: FontWeight.w600,
+                                                                    fontSize: 22,
+                                                                  ),
+                                                                ),
+                                                                IconButton(
+                                                                  onPressed: () {
+                                                                    Navigator.pop(context);
+                                                                  },
+                                                                  icon: Icon(Icons.close),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Divider(),
+                                                            Expanded(
+                                                              child: ListView(
+                                                                children: filterOptions.keys.map((filter) {
+                                                                  return CheckboxListTile(
+                                                                    title: Text(filter),
+                                                                    value: filterOptions[filter],
+                                                                    onChanged: (bool? value) {
+                                                                      setModalState(() {
+                                                                        filterOptions[filter] = value!;
+                                                                      });
+                                                                    },
+                                                                  );
+                                                                }).toList(),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Positioned(
+                                                        bottom: 16,
+                                                        left: 16,
+                                                        right: 16,
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Expanded(
+                                                              child: ElevatedButton(
+                                                                style: ElevatedButton.styleFrom(
+                                                                  backgroundColor: Colors.grey.shade200,
+                                                                  minimumSize: Size(120, 48),
+                                                                  shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(90),
+                                                                  ),
+                                                                ),
+                                                                onPressed: () {
+                                                                  setModalState(() {
+                                                                    filterOptions.updateAll((key, value) => false);
+                                                                  });
+                                                                },
+                                                                child: Text(
+                                                                  "Clear",
+                                                                  style: TextStyle(color: Colors.black),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(width: 10),
+                                                            Expanded(
+                                                              child: ElevatedButton(
+                                                                style: ElevatedButton.styleFrom(
+                                                                  backgroundColor: Colors.red,
+                                                                  minimumSize: Size(120, 48),
+                                                                  shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(90),
+                                                                  ),
+                                                                ),
+                                                                onPressed: () {
+                                                                  Navigator.pop(context);
+                                                                },
+                                                                child: Text(
+                                                                  "Apply",
+                                                                  style: TextStyle(color: Colors.white),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    icon: Icon(Remix.filter_2_line, color: Colors.blue),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    SizedBox(height: 10),
+
+                    // Transactions List Section
+                    value == 1
                         ? Column(
                       children: [
                         SizedBox(
@@ -310,12 +300,14 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                       ],
                     )
                         : ListView.builder(
-                      itemCount: 1,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: 10,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(bottom: 10.0),
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
@@ -329,12 +321,10 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                               ],
                             ),
                             child: Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Mohit",
@@ -356,11 +346,10 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                                 Container(
                                   decoration: BoxDecoration(
                                     color: Color(0xFFC0F1E1),
-                                    borderRadius:
-                                    BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 5),
+                                    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
                                     child: Text(
                                       "Payment-in",
                                       style: TextStyle(
@@ -372,12 +361,10 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                                 ),
                                 SizedBox(height: 12),
                                 Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Total",
@@ -397,8 +384,7 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                                       ],
                                     ),
                                     Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
                                         Text(
                                           "Unused",
@@ -417,24 +403,23 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(width: 9,),
+                                    SizedBox(width: 9),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width*0.3,
+                                      width: MediaQuery.of(context).size.width * 0.3,
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           GestureDetector(
-                                              child: Icon(
-                                                  FlutterRemix.printer_line,
-                                                  color: Colors.grey,
-                                                ),
+                                            child: Icon(
+                                              Remix.printer_line,
+                                              color: Colors.grey,
                                             ),
-                                      
+                                          ),
                                           GestureDetector(
                                             onTap: () {
                                               double screenWidth = MediaQuery.of(context).size.width;
                                               double screenHeight = MediaQuery.of(context).size.height;
-                                      
+
                                               showModalBottomSheet(
                                                 backgroundColor: Colors.white,
                                                 context: context,
@@ -443,30 +428,26 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                                                 ),
                                                 builder: (context) {
                                                   return Container(
-                                                    height: screenHeight * 0.25, // Responsive height
+                                                    height: screenHeight * 0.25,
                                                     padding: EdgeInsets.symmetric(
-                                                      horizontal: screenWidth * 0.04, // Responsive horizontal padding
-                                                      vertical: screenHeight * 0.015, // Responsive vertical padding
+                                                      horizontal: screenWidth * 0.04,
+                                                      vertical: screenHeight * 0.015,
                                                     ),
                                                     child: Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
-                                                        // Share Transaction Header
                                                         Padding(
                                                           padding: EdgeInsets.only(bottom: screenHeight * 0.01),
                                                           child: Text(
                                                             "Share transaction",
                                                             style: TextStyle(
-                                                              fontSize: screenWidth * 0.045, // Responsive font size
+                                                              fontSize: screenWidth * 0.045,
                                                               fontWeight: FontWeight.bold,
                                                             ),
                                                           ),
                                                         ),
-                                      
-                                                        // Row for Share as Image & Share as PDF
                                                         Row(
                                                           children: [
-                                                            // Share as Image
                                                             Expanded(
                                                               child: Padding(
                                                                 padding: EdgeInsets.all(screenWidth * 0.02),
@@ -489,9 +470,9 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                                                                           borderRadius: BorderRadius.circular(90),
                                                                         ),
                                                                         child: Icon(
-                                                                          FlutterRemix.image_line,
+                                                                          Remix.image_line,
                                                                           color: Colors.red,
-                                                                          size: screenWidth * 0.06, // Responsive icon size
+                                                                          size: screenWidth * 0.06,
                                                                         ),
                                                                       ),
                                                                       SizedBox(width: screenWidth * 0.02),
@@ -510,8 +491,6 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                                                                 ),
                                                               ),
                                                             ),
-                                      
-                                                            // Share as PDF
                                                             Expanded(
                                                               child: Padding(
                                                                 padding: EdgeInsets.all(screenWidth * 0.02),
@@ -557,8 +536,6 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                                                             ),
                                                           ],
                                                         ),
-                                      
-                                                        // Checkbox Row for Default Selection
                                                         Padding(
                                                           padding: EdgeInsets.only(top: screenHeight * 0.015),
                                                           child: Row(
@@ -592,66 +569,64 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                                                 },
                                               );
                                             },
-                                            child:Icon(
-                                                FlutterRemix.share_forward_line,
-                                                color: Colors.grey,
-                                                size: MediaQuery.of(context).size.width * 0.06, // Responsive icon size
-                                              ),
-                                           ),
-                                      
+                                            child: Icon(
+                                              Remix.share_forward_line,
+                                              color: Colors.grey,
+                                              size: MediaQuery.of(context).size.width * 0.06,
+                                            ),
+                                          ),
                                           GestureDetector(
-                                              onTap: () {
-                                                showModalBottomSheet(
-                                                  backgroundColor: Colors.white,
-                                                  context: context,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                                                  ),
-                                                  builder: (context) {
-                                                    return Container(
-                                                      height: screenHeight * 0.25,
-                                                      child: Column(
-                                                        children: [
-                                                          // Header with "More Options" and Close Button
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(8.0),
-                                                            child: Row(
-                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  "More Options",
-                                                                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                                                                ),
-                                                                IconButton(
-                                                                  onPressed: () {
-                                                                    Navigator.pop(context); // Close the bottom sheet
-                                                                  },
-                                                                  icon: Icon(Icons.close),
-                                                                ),
-                                                              ],
-                                                            ),
+                                            onTap: () {
+                                              showModalBottomSheet(
+                                                backgroundColor: Colors.white,
+                                                context: context,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                                                ),
+                                                builder: (context) {
+                                                  return Container(
+                                                    height: screenHeight * 0.25,
+                                                    child: Column(
+                                                      children: [
+                                                        Padding(
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          child: Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                "More Options",
+                                                                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                                              ),
+                                                              IconButton(
+                                                                onPressed: () {
+                                                                  Navigator.pop(context);
+                                                                },
+                                                                icon: Icon(Icons.close),
+                                                              ),
+                                                            ],
                                                           ),
-                                                          Divider(height: 1, thickness: 0.5),
-                                                          ListTile(
-                                                            title: Text("Duplicate"),
-                                                            onTap: () {
-                                                              Navigator.pop(context);
-                                                            },
-                                                          ),
-                                                          Divider(height: 1, thickness: 0.5),
-                                                          ListTile(
-                                                            title: Text("Delete"),
-                                                            onTap: () {
-                                                              Navigator.pop(context);
-                                                            },
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              child:Icon(FlutterRemix.more_2_line)
+                                                        ),
+                                                        Divider(height: 1, thickness: 0.5),
+                                                        ListTile(
+                                                          title: Text("Duplicate"),
+                                                          onTap: () {
+                                                            Navigator.pop(context);
+                                                          },
+                                                        ),
+                                                        Divider(height: 1, thickness: 0.5),
+                                                        ListTile(
+                                                          title: Text("Delete"),
+                                                          onTap: () {
+                                                            Navigator.pop(context);
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: Icon(Remix.more_2_line),
                                           ),
                                         ],
                                       ),
@@ -664,11 +639,11 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
                         );
                       },
                     ),
-                  ),
-                ],
+                    SizedBox(height: 80), // Add padding at bottom to prevent overlap with button
+                  ],
+                ),
               ),
             ),
-
             Positioned(
               bottom: 20,
               left: 0,
@@ -676,27 +651,27 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
               child: Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(14),
+                    padding: EdgeInsets.symmetric(horizontal: 14,vertical: 12),
                     backgroundColor: Color(0xFFE03537),
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Add_new_Sales()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Add_new_Sales()));
                   },
-                  child:Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Remix.money_rupee_circle_line,color: Colors.white,size: 20,),
-                        const SizedBox(width: 8),
-                        Text(
-                          "Add New Sale",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Remix.money_rupee_circle_line, color: Colors.white, size: 20),
+                      const SizedBox(width: 8),
+                      Text(
+                        "Add New Sale",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
               ),
+            ),
           ],
         ),
       ),
@@ -704,11 +679,11 @@ class _TransactionDetailsTab extends State<TransactionDetailsTab> {
   }
 }
 var iconOf_moreOption = [
-  FlutterRemix.bank_line,
-  FlutterRemix.book_open_line,
-  FlutterRemix.sticky_note_line,
-  FlutterRemix.arrow_up_down_line,
-  FlutterRemix.printer_line,
+  Remix.bank_line,
+  Remix.book_open_line,
+  Remix.sticky_note_line,
+  Remix.arrow_up_down_line,
+  Remix.printer_line,
   Remix.chat_settings_line,
 ];
 var labelOf_moreOption = [
@@ -794,12 +769,12 @@ void ShowAll(BuildContext context)
 }
 
 var iconOf_SaleTransaction = [
-  FlutterRemix.download_cloud_2_line,
-  FlutterRemix.arrow_up_line,
-  FlutterRemix.truck_line,
-  FlutterRemix.calculator_line,
-  FlutterRemix.money_dollar_box_line,
-  FlutterRemix.shape_2_line,
+  Remix.download_cloud_2_line,
+  Remix.arrow_up_line,
+  Remix.truck_line,
+  Remix.calculator_line,
+  Remix.money_dollar_box_line,
+  Remix.shape_2_line,
   Remix.discount_percent_line,
 ];
 var labelOf_SaleTransaction = [
@@ -813,10 +788,10 @@ var labelOf_SaleTransaction = [
 ];
 
 var iconOf_PurchaseTransaction = [
-  FlutterRemix.shopping_cart_2_line,
-  FlutterRemix.money_cny_box_line,
-  FlutterRemix.secure_payment_line,
-  FlutterRemix.shopping_bag_2_line,
+  Remix.shopping_cart_2_line,
+  Remix.money_cny_box_line,
+  Remix.secure_payment_line,
+  Remix.shopping_bag_2_line,
 ];
 var labelOf_PurchaseTransaction = [
   "Purchase",
@@ -825,7 +800,7 @@ var labelOf_PurchaseTransaction = [
   "Purchase Order",
 ];
 var iconOf_OtherTransaction = [
-  FlutterRemix.wallet_3_line,
+  Remix.wallet_3_line,
   Remix.p2p_line,
 ];
 var labelOf_OtherTransaction = [

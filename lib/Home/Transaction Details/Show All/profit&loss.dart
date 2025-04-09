@@ -1,6 +1,9 @@
+import 'package:demo/Home/Prefered_underline_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'package:remixicon/remixicon.dart';
 
 class Profit_and_loss extends StatefulWidget {
   @override
@@ -8,44 +11,130 @@ class Profit_and_loss extends StatefulWidget {
 }
 
 class Profitandloss extends State<Profit_and_loss> {
-  String? selected_timeDuration = "This week";
-  final List<String> time_duration_option = [
+
+  var firstDate = DateTime.now();
+  var lastDate = DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
+
+  String? selectedTimeDuration = "This week";
+  final List<String> timeDurationOptions = [
     'Today',
     'This week',
     'This month',
     'This quarter',
     'This Financial Year',
-    'custom'
+    'Custom'
   ];
 
-  var firstDate = DateTime.now();
-  var lastDate = DateTime(DateTime.now().year, DateTime.now().month + 1, 0);
-
-  void _select_firstDate(BuildContext context) {
-    showDatePicker(
+  void _select_firstDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: DateTime(DateTime.monthsPerYear),
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          firstDate = picked;
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        firstDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
   }
-  void _select_lastDate(BuildContext context) {
-    showDatePicker(
+  void _select_lastDate(BuildContext context) async{
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2030),
-    ).then((picked) {
-      if (picked != null) {
-        setState(() {
-          lastDate = picked;
-        });
-      }
-    });
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Colors.blue,
+            hintColor: Colors.blue,
+            colorScheme: ColorScheme.light(primary: Colors.blue),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      setState(() {
+        lastDate = DateFormat("dd/MM/yyyy").format(pickedDate) as DateTime;
+      });
+    }
+  }
+
+  String? selected_timeDuration = "This week";
+  void _showTimeSelectionModal(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.48,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Select",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.close),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(color: Colors.grey.shade200, thickness: 1),
+              ListView.separated(
+                shrinkWrap: true,
+                itemCount: timeDurationOptions.length,
+                separatorBuilder: (BuildContext context, int index) {
+                  return Divider(color: Colors.grey.shade200, thickness: 1);
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    dense: true,
+                    visualDensity: VisualDensity.compact,
+                    title: Text(timeDurationOptions[index]),
+                    trailing: selectedTimeDuration == timeDurationOptions[index]
+                        ? Icon(Icons.circle, color: Colors.blue, size: 12)
+                        : null,
+                    onTap: () {
+                      setState(() {
+                        selectedTimeDuration = timeDurationOptions[index];
+                      });
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -58,23 +147,21 @@ class Profitandloss extends State<Profit_and_loss> {
         ),
         surfaceTintColor: Colors.white,
         backgroundColor:Colors.white,
-        title: Text(
-          "Profit And Loss Report",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        bottom: Prefered_underline_appbar(),
+        title: Text('Profit And Loss Report',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         actions: [
-          //pdf
           Container(
             height: 25,
             width: 25,
             child: Image.asset("Assets/Images/pdf.png"),
           ),
-          //xls
+          SizedBox(width: 10,),
           Container(
-            height: 30,
-            width: 50,
+            height: 25,
+            width: 25,
             child: Image.asset("Assets/Images/xls.png"),
           ),
+          SizedBox(width: 10,),
         ],
       ),
       body: Container(
@@ -82,39 +169,26 @@ class Profitandloss extends State<Profit_and_loss> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              Container(
+                padding: EdgeInsets.all(8),
+                color: Colors.white,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    DropdownButton<String>(
-                      value: selected_timeDuration,
-                      hint: Text(
-                        'This month',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        size: 16,
-                        color: Colors.blue,
-                      ),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selected_timeDuration = newValue;
-                        });
+
+                    GestureDetector(
+                      onTap: (){
+                        _showTimeSelectionModal(context);
                       },
-                      items: time_duration_option
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        );
-                      }).toList(),
-                      underline: Container(),
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Text("${selected_timeDuration}"),
+                            SizedBox(width: 5,),
+                            Icon(Remix.arrow_down_s_line,color: Colors.blueAccent,),
+                          ],
+                        ),
+                      ),
                     ),
                     Container(
                       height: 20,
@@ -123,11 +197,7 @@ class Profitandloss extends State<Profit_and_loss> {
                         color: Colors.grey,
                       ),
                     ),
-                    Icon(
-                      Icons.calendar_month,
-                      color: Colors.blue,
-                      size: 20,
-                    ),
+                    Icon(Remix.calendar_2_line,color: Colors.blueAccent,size: 15,),
                     SizedBox(width: 8),
                     GestureDetector(
                       onTap: () => _select_firstDate(context),
@@ -300,7 +370,6 @@ class Profitandloss extends State<Profit_and_loss> {
                     ),
                   ),
                 ),
-          
             ],
           ),
         ),

@@ -2,7 +2,6 @@ import 'package:demo/Home/Prefered_underline_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_remix/flutter_remix.dart';
 import 'package:intl/intl.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -83,7 +82,7 @@ class _Day_Book extends State<Day_Book> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(FlutterRemix.calendar_2_line, color: Colors.blueAccent,
+                  Icon(Remix.calendar_2_line, color: Colors.blueAccent,
                     size: 15,),
                   SizedBox(width: 8),
                   GestureDetector(
