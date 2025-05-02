@@ -1,3 +1,10 @@
+import 'package:demo/Home/Transaction%20Details/Transaction%20Settings/txn_settings.dart';
+import 'package:demo/Settings/General.dart';
+import 'package:demo/Settings/Item_Setting.dart';
+import 'package:demo/Settings/Party.dart';
+import 'package:demo/Settings/Reminder.dart';
+import 'package:demo/Settings/Taxes_&_GST.dart';
+import 'package:demo/Settings/Transaction_SMS.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:remixicon/remixicon.dart';
@@ -52,7 +59,9 @@ class _SettingsState extends State<Settings> {
           children: [
             SizedBox(height: 10,),
             ListTile(
-              onTap: (){},
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>General_Settings()));
+              },
               dense: true,
               contentPadding: EdgeInsets.only(left: 20),
               leading: Icon(Remix.settings_line),
@@ -63,6 +72,9 @@ class _SettingsState extends State<Settings> {
         
             ListTile(
               dense: true,
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>Transaction_Settings()));
+              },
               contentPadding: EdgeInsets.only(left: 20),
               leading: Icon(Remix.money_rupee_circle_line),
               title: Text("Transaction",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
@@ -73,6 +85,9 @@ class _SettingsState extends State<Settings> {
         
             ListTile(
               dense: true,
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>Taxes_and_Gst()));
+              },
               contentPadding: EdgeInsets.only(left: 20),
               leading: Icon(Remix.printer_line),
               title: Text("Invoice Print",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
@@ -83,6 +98,9 @@ class _SettingsState extends State<Settings> {
         
             ListTile(
               dense: true,
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>Taxes_and_Gst()));
+              },
               contentPadding: EdgeInsets.only(left: 20),
               leading: Icon(Remix.discount_percent_line),
               title: Text("Taxes & GST",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
@@ -103,6 +121,9 @@ class _SettingsState extends State<Settings> {
         
             ListTile(
               dense: true,
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>Transaction_Sms()));
+              },
               contentPadding: EdgeInsets.only(left: 20),
               leading: Icon(Remix.message_2_fill),
               title: Text("Transaction SMS",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
@@ -113,6 +134,9 @@ class _SettingsState extends State<Settings> {
         
             ListTile(
               dense: true,
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>Reminders()));
+              },
               contentPadding: EdgeInsets.only(left: 20),
               leading: Icon(Remix.notification_3_line),
               title: Text("Reminder",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
@@ -123,6 +147,9 @@ class _SettingsState extends State<Settings> {
         
             ListTile(
               dense: true,
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>Party()));
+              },
               contentPadding: EdgeInsets.only(left: 20),
               leading: Icon(Remix.map_pin_user_fill),
               title: Text("Party",style:TextStyle(fontWeight: FontWeight.w500,fontSize: 18)),
@@ -131,6 +158,9 @@ class _SettingsState extends State<Settings> {
             Divider(color: Colors.grey.shade500,),
         
             ListTile(
+              onTap: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>ItemSetting()));
+              },
               dense: true,
               contentPadding: EdgeInsets.only(left: 20),
               leading: Icon(Remix.slideshow_line),
