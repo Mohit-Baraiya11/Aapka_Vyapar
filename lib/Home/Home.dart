@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           flexibleSpace: Column(
             children: [
+
               SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
